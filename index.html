@@ -213,10 +213,11 @@ function showCard(n){
   document.getElementById('pr-sub').textContent=total+'명 중 '+rank+'위';
   var streak=ex.streak||0;
   document.getElementById('ps-val').textContent=streak+'주 '+(streak>=4?'👑':streak>0?'🔥'.repeat(Math.min(streak,3)):'');
-  if(streak===0){document.getElementById('ps-sub').textContent='이번 주 첫 도전!';document.getElementById('ps-warn').textContent='';}
+  var mr=ex.miss_remain!==undefined?ex.miss_remain:2;
+  if(streak===0){document.getElementById('ps-sub').textContent='이번 주 첫 도전!';document.getElementById('ps-warn').textContent=mr<2?'⚠ 미달 '+mr+'회 남음':'';}
   else if(streak>=4){document.getElementById('ps-sub').textContent='이번 달 완주! 👑';document.getElementById('ps-warn').textContent='';}
   else{document.getElementById('ps-sub').textContent=streak+'주 연속 달성 중';
-    document.getElementById('ps-warn').textContent=(4-streak)<=2?'⚠ 미달 '+(4-streak)+'회 남음':'';}
+    document.getElementById('ps-warn').textContent=mr<=2?'⚠ 미달 '+mr+'회 남음':'';}
   var bmap={m1:'bm',m2:'bm',best1:'bb',best2:'bb',geun1:'bg',geun2:'bg',guer2:'bgr',streak:'bs',top10:'bt'};
   var badges=ex.badges||[];
   document.getElementById('pb').innerHTML=badges.length?badges.map(function(b){return '<span class="badge '+(bmap[b.id]||'be')+'">'+b.icon+' '+b.label+'</span>';}).join(''):'<span class="badge be">아직 획득한 뱃지가 없어요</span>';
